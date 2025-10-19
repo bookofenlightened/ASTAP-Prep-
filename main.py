@@ -202,4 +202,16 @@ def upload():
         except Exception as e:
             print('DB Insert Error:', e)
 
-    return render_template_string(PREVIEW_HTML,
+    return render_template_string(
+        PREVIEW_HTML,
+        questions=all_questions,
+        count=len(all_questions),
+        csv_name=csv_name
+    )
+
+@app.route('/download/<csv_name>')
+def download(csv_name):
+    return send_from_directory(app.config['GENERATED_FOLDER'], csv_name, as_attachment=True)
+
+if __name__=='__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT',5000)))
