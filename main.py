@@ -1,5 +1,23 @@
-import os import io import re import json import csv import tempfile from flask import Flask, request, jsonify, send_from_directory, render_template_string from werkzeug.utils import secure_filename import pymysql from dotenv import load_dotenv try: import fitz except: fitz = None try: import google.generativeai as genai except: genai = None
+import os
+import io
+import re
+import json
+import csv
+import tempfile
+from flask import Flask, request, jsonify, send_from_directory, render_template_string
+from werkzeug.utils import secure_filename
+import pymysql
+from dotenv import load_dotenv
 
+try:
+    import fitz
+except:
+    fitz = None
+
+try:
+    import google.generativeai as genai
+except:
+    genai = None
 load_dotenv()
 
 DB_HOST = os.getenv('DB_HOST') DB_USER = os.getenv('DB_USER') DB_PASS = os.getenv('DB_PASS') DB_NAME = os.getenv('DB_NAME') DB_PORT = int(os.getenv('DB_PORT', '3306')) GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
